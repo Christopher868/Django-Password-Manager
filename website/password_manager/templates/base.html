@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<!-- Sight wide head elements and block for page specific elements -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block head %}{% endblock head %}
+</head>
+<body>
+    <!--header with block for page specific headers-->
+    <header>
+        {% block header %}
+        <nav id="base-nav">
+            <h1 id="website-name">Password Manager</h1>
+            <ul id="nav-list">
+                {%if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+                {% endif %}
+                <li class="nav-item" id="menu-btn"><svg id="menu-symbol" xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></li>
+            </ul>
+        </nav>
+
+        <!-- Toggable sidebar -->
+        <div id="base-sidebar" class="hidden">
+                <ul id="sidebar-list">
+                    <li class="sidebar-item"><svg id="close-symbol" xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" ><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="">Account</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="">Passwords</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="">About</a></li>
+                    
+                </ul>
+        </div>
+        {% endblock header %}
+    </header>
+
+    <!-- Main for page content with block for page specific content -->
+    <main>
+        {% block content %}
+     
+        {% endblock content %}
+    </main>
+
+
+    <!-- Footer with block for page specific footer -->
+    <footer>
+        {% block footer %}
+        <h3 id="contact-header">Contact Me</h3>
+        <div>
+            <ul id="contact-list">
+                <li>Email: <a href="mailto:christopherhicks868@gmail.com">Christopherhicks868@gmail.com</a></li>
+                <li>Phone Number: <a href="tel:+6789938083">678-993-8083</a></li>
+            </ul>
+        </div>
+        <p>Christopher Hicks &copy;</p>
+        {% endblock footer %}
+    </footer>
+    <script src="{% static 'js/base.js' %}"></script>
+</body>
+</html>
