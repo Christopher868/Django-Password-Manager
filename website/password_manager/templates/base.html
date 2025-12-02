@@ -14,20 +14,22 @@
     <!--header with block for page specific headers-->
     <header>
         {% block header %}
+
+        <!-- Navbar for website -->
         <nav id="base-nav">
             <h1 id="website-name">Password Manager</h1>
             <ul id="nav-list">
                 {%if user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                 {% endif %}
                 <li class="nav-item" id="menu-btn"><svg id="menu-symbol" xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></li>
             </ul>
         </nav>
 
         <!-- Toggable sidebar -->
-        <div id="base-sidebar" class="hidden">
+        <div id="base-sidebar" class="smooth-hidden">
                 <ul id="sidebar-list">
                     <li class="sidebar-item" id="close-btn"><svg id="close-symbol" xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" ><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="">Account</a></li>
@@ -36,30 +38,49 @@
                     
                 </ul>
         </div>
+
         {% endblock header %}
+        {% if messages %}
+        <div id="message-container">
+            <ul id="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="message {{ message.tags }}" {% endif %}> {{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
     </header>
 
     <!-- Main for page content with block for page specific content -->
     <main>
+        <section id="base-content">
         {% block content %}
-     
+            <h3>Hello</h3>
         {% endblock content %}
+        </section>
     </main>
 
 
     <!-- Footer with block for page specific footer -->
     <footer>
+        <section id="base-footer">
         {% block footer %}
-        <h3 id="contact-header">Contact Me</h3>
-        <div>
-            <ul id="contact-list">
-                <li>Email: <a href="mailto:christopherhicks868@gmail.com" class="contact-link">Christopherhicks868@gmail.com</a></li>
-                <li>Phone Number: <a href="tel:+6789938083" class="contact-link">678-993-8083</a></li>
-            </ul>
-        </div>
-        <p>Christopher Hicks &copy;</p>
+
+        <!-- Contact me section of footer -->
+            <h3 id="contact-header">Contact Me</h3>
+            <div>
+                <ul id="contact-list">
+                    <li>Email: <a href="mailto:christopherhicks868@gmail.com" class="contact-link">Christopherhicks868@gmail.com</a></li>
+                    <li>Phone Number: <a href="tel:+6789938083" class="contact-link">678-993-8083</a></li>
+                </ul>
+            </div>
+            <p id="author">Christopher Hicks &copy;</p>
+
         {% endblock footer %}
+        </section>
     </footer>
+    
     <script src="{% static 'js/base.js' %}"></script>
+    {% block script %}{% endblock script %}
 </body>
 </html>

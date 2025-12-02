@@ -1,0 +1,81 @@
+/* login page header styles */
+#login-header {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 2.5rem;
+    color: #294659;
+    text-shadow: 0px 0px 1px black;
+    margin-bottom: 30px;
+    &:hover {
+        cursor:default;
+    }
+}
+
+/* Login form styles */
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .75rem;
+    width: 30%;
+    min-width:300px;
+    box-shadow: 1px 1px 4px black;
+    padding: 5rem 0;
+    border-radius: .5rem;
+}
+
+#login-form input {
+    padding: .4rem 1rem;
+    width: 90%;
+    min-width: 200xp;
+    border-radius: .5rem;
+    font-size: 1rem;
+    
+    &::placeholder {
+        font-weight: bold;
+    }
+}
+
+
+#login-btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    width: 90%;
+    min-width: 200px;
+}
+
+#login-btn-container button {
+    min-width: 100px;
+    width: 48%;
+    
+    background-color: #294659;
+    border-radius: .5rem;
+    border:1px solid black;
+    box-shadow: 0px 0px 2px black;
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+    text-shadow: 1px 1px 4px black;
+    &:hover{
+        box-shadow: 0px 0px 4px black;
+        cursor: pointer;
+    }
+    &:active {
+        box-shadow: inset 0px 0px 4px black;
+    }
+}
+
+#login-btn-container a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.button-size {
+    padding: .5rem 0;
+}

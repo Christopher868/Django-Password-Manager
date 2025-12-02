@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Page specific head elements -->
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <title>Register</title>
+{% endblock head %}
+{% block header %}{% endblock header %}
+<!-- Registration page content -->
+{% block content %}
+    <form id="register-form" action="{% url 'register' %}" method="POST" data-check-img-url ="{% static 'images/Green-Checkmark.svg' %}" data-x-img-url ="{% static 'images/Red-X.svg' %}">
+        <h1 id="register-header">Register</h1>
+        {% csrf_token %}
+        <div class="input-container"></div>
+            <input type="text" name="username" id="username" placeholder="Enter username" required>
+        </div>
+
+        <div class="input-container">
+            <input type="password" name="password1" id="password1" placeholder="Enter password" required>
+            <small id="password1-status-msg">Password must be atleast 8 characters <img id="password1-status-symbol" class="status-symbol" src="{% static 'images/Red-X.svg' %}" alt="Field status symbol"></small>
+        </div>    
+
+        <div class="input-container">
+            <input type="password" name="password2" id="password2" placeholder="Confirm password" required>
+            <small id="password2-status-msg" class="">Passwords must match <img id="password2-status-symbol" class="status-symbol" src="{% static 'images/Red-X.svg' %}" alt="Field status symbol"></small>
+        </div>  
+
+        <div id="register-btn-container">
+            <button type="button"><a class="button-size" href="{% url 'login' %}">Cancel</a></button>
+            <button id="register-btn" class="button-size" type="submit" disabled>Register</button>
+        </div>
+    </form>
+{% endblock content %}
+{% block script %}<script src="{% static 'js/register.js' %}"></script>{% endblock script %}
