@@ -41,8 +41,8 @@ def userLogin(request):
 def userLogout(request):
     logout(request)
     messages.success(request, "Successfully logged out!")
-    
-    return redirect('index')
+    referrer = request.META.get('HTTP_REFERER')
+    return redirect(referrer)
 
 
 
@@ -85,6 +85,7 @@ def userAccount(request):
             form = UpdateUserForm(instance=request.user)
         return render(request, 'accounts/user-account.html', {"form":form})
     
+
 
 # View for letting user change password
 def userChangePassword(request):
