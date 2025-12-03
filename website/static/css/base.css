@@ -55,9 +55,13 @@ footer {
 
     &:hover {
         text-shadow: 2px 2px 4px black;
-        cursor: default;
-    }
-    
+    }    
+}
+
+
+#header-link {
+    text-decoration: none;
+    color:inherit
 }
 
 #nav-list {

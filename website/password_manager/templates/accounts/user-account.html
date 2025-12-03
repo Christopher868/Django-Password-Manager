@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Page specific head elements -->
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/accounts/user-account.css' %}">
+    <title>Account Info</title>
+{% endblock head %}
+<!-- User account page content -->
+{% block content %}
+
+    <!-- User Information form -->
+    <form id="account-form" action="{% url 'user-account' %}" method="POST">
+        <h1 id="account-header">Account Info</h1>
+        {% csrf_token %}
+        <div class="input-container">
+            {{ form.username }}
+        </div>
+
+        <div class="input-container">
+            {{ form.email }}
+        </div>
+        <button id="change-pwd-btn" class="button-size" type="button"><a href="{% url 'change-password' %}">Change Password</a></button>
+
+        <div id="account-btn-container">
+            <button type="button"><a class="button-size" href="{% url 'index' %}">Cancel</a></button>
+            <button id="account-btn" class="button-size" type="submit">Save</button>
+        </div>
+    </form>
+{% endblock content %}

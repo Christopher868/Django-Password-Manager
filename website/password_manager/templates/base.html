@@ -17,10 +17,10 @@
 
         <!-- Navbar for website -->
         <nav id="base-nav">
-            <h1 id="website-name">Password Manager</h1>
+            <h1 id="website-name"><a id="header-link" href="{% url 'index' %}">Password Manager</a></h1>
             <ul id="nav-list">
                 {%if user.is_authenticated %}
-                <li class="nav-item" id="hello-msg">Hello, {{ username }}!</li>
+                <li class="nav-item" id="hello-msg">Hello, {{ request.user.username }}!</li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                 {% endif %}
@@ -32,8 +32,8 @@
         <div id="base-sidebar" class="smooth-hidden">
                 <ul id="sidebar-list">
                     <li class="sidebar-item" id="close-btn"><svg id="close-symbol" xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" ><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="">Account</a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="">Passwords</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{% url 'index' %}">Home</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="{% url 'user-account' %}">Account</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="">About</a></li>
                     {% if user.is_authenticated %}
                     <li class="sidebar-item"><a class="sidebar-link" href="{% url 'logout' %}">Logout</a></li>

@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
-from django.contrib.auth.forms import AuthenticationForm
-from .forms import CustomUserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from .forms import CustomUserCreationForm, UpdateUserForm
 from django.contrib import messages
 
 
@@ -45,6 +46,7 @@ def userLogout(request):
 
 
 
+# View for registering user
 def userRegistration(request):
     if request.user.is_authenticated:
         messages.info(request, "You are already logged in!")
@@ -64,3 +66,40 @@ def userRegistration(request):
                         messages.error(request, f"{field}: {error}")
 
         return render(request, 'accounts/register.html', {})
+    
+
+
+# View for letting user edit their own information
+def userAccount(request):
+    if not request.user.is_authenticated:
+        messages.error(request, "Must be logged into to view account information.")
+        return redirect('login')
+    else:
+        if request.method == "POST":
+            form = UpdateUserForm(request.POST, instance=request.user)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Changes to profile saved")
+                return redirect("user-account")
+        else:
+            form = UpdateUserForm(instance=request.user)
+        return render(request, 'accounts/user-account.html', {"form":form})
+    
+
+# View for letting user change password
+def userChangePassword(request):
+    if not request.user.is_authenticated:
+        messages.error(request, "Log in to change password!")
+        return redirect('login')
+    else:
+        if request.method == "POST":
+            form = PasswordChangeForm(request.user, request.POST)
+            if form.is_valid():
+                user = form.save()
+                update_session_auth_hash(request, user)
+                messages.success(request, "Password successfully changed!")
+                return redirect("user-account")
+        else:
+            form = PasswordChangeForm(request.user)
+
+        return render(request, 'accounts/change-pwd.html', {"form":form})
