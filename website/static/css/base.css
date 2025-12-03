@@ -195,6 +195,21 @@ footer {
     }
 }
 
+#hello-msg-sidebar {
+    text-align: center;
+    display: none;
+    &:hover {
+        outline: none;
+        box-shadow: none;
+        text-shadow: 2px 2px 4px black;
+        cursor: default;
+    }
+
+    @media (max-width:600px) {
+        display: block;
+    }
+}
+
 /* main styles */
 
 #base-content {
