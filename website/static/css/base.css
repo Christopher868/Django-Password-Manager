@@ -96,6 +96,19 @@ footer {
     
 }
 
+#hello-msg {
+    &:hover {
+        outline: none;
+        box-shadow: none;
+        text-shadow: 2px 2px 4px black;
+        cursor: default;
+    }
+
+    @media (max-width:600px) {
+        display: none;
+    }
+}
+
 #menu-symbol {
     padding: .25rem .50rem;
     height: 40px;
@@ -234,12 +247,16 @@ footer {
 /* messages styles */
 
 #message-container {
-    z-index: 0200;
+    z-index: 200;
     position: absolute;
     top: 120%;
     left: 50%;
     transform: translate(-50%, 0);
-    
+    text-align: center;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #messages {
@@ -248,11 +265,12 @@ footer {
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    width: fit-content;
 }
 
 .message{
     box-shadow: 1px 1px 4px black;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     color:#294659;
     background-color: white;
     border-radius: 1rem;
@@ -283,4 +301,8 @@ footer {
 
 .fade {
     opacity: 0;
+}
+
+.disable-effects {
+    pointer-events: none !important;
 }

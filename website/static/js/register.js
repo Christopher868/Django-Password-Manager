@@ -8,6 +8,7 @@ const xUrl = registerForm.dataset.xImgUrl
 const checkUrl = registerForm.dataset.checkImgUrl
 var password1ValidStatus = false
 var password2ValidStatus = false
+const inputFields = registerForm.querySelectorAll('input')
 
 
 
@@ -37,11 +38,19 @@ password2.addEventListener('input', (e) => {
 
 // Event listener to disable and enable register button 
 registerForm.addEventListener('input', (e) => {
-    if(password1ValidStatus && password2ValidStatus){
+    // Checks if all input fields are filled out
+    var inputStatus = Array.from(inputFields).every(input => input.value.length >= 1)
+    
+    // Enables register button if all requirements are met and disables it if they are not
+    if(password1ValidStatus && password2ValidStatus && inputStatus){
         registerBtn.disabled = false
         registerBtn.style.opacity = "100%"
+        registerBtn.classList.remove('disable-effects')
     } else {
         registerBtn.disabled = true
         registerBtn.style.opacity = "60%"
+        registerBtn.classList.add('disable-effects')
+        
+
     }
 })

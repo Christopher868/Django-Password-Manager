@@ -1,13 +1,18 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import CustomUserCreationForm
 from django.contrib import messages
 
 
 
 # View for index home page
 def index(request):
-    return render(request, 'index.html', {})
+    if(request.user):
+        username = request.user.username
+        return render(request, 'index.html', {'username':username})
+    else:
+        return render(request, 'index.html', {})
 
 
 # View for login page
@@ -30,6 +35,7 @@ def userLogin(request):
         return render(request, 'accounts/login.html', {}) 
 
 
+
 # View for logging out user
 def userLogout(request):
     logout(request)
@@ -37,13 +43,15 @@ def userLogout(request):
     
     return redirect('index')
 
+
+
 def userRegistration(request):
     if request.user.is_authenticated:
         messages.info(request, "You are already logged in!")
         return redirect('index')
     else:
         if request.method == "POST":
-            form = UserCreationForm(request.POST)
+            form = CustomUserCreationForm(request.POST)
 
             if form.is_valid():
                 user = form.save()

@@ -20,7 +20,7 @@
             <h1 id="website-name">Password Manager</h1>
             <ul id="nav-list">
                 {%if user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                <li class="nav-item" id="hello-msg">Hello, {{ username }}!</li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
                 {% endif %}
@@ -35,6 +35,9 @@
                     <li class="sidebar-item"><a class="sidebar-link" href="">Account</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="">Passwords</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="">About</a></li>
+                    {% if user.is_authenticated %}
+                    <li class="sidebar-item"><a class="sidebar-link" href="{% url 'logout' %}">Logout</a></li>
+                    {% endif %}
                     
                 </ul>
         </div>

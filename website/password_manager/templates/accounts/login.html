@@ -9,16 +9,24 @@
 {% block header %}{% endblock header %}
 <!-- Login page content -->
 {% block content %}
+
+    <!-- Form that allows users to login -->
     <form id="login-form" action="{% url 'login' %}" method="POST">
         <h1 id="login-header">Login</h1>
         {% csrf_token %}
+        
         <input type="text" name="username" id="username" placeholder="Enter username" required>
         <input type="password" name="password" id="password" placeholder="Enter password" required>
         <div id="login-btn-container">
             <button type="button"><a class="button-size" href="{% url 'index' %}">Cancel</a></button>
             <button class="button-size" type="submit">Login</button>
         </div>
-        <p>New user? Sign up <a href="{% url 'register' %}">here</a>.</p>
+
+        <!-- Register and reset password links -->
+        <div id="login-info-container">
+            <p>Forgot your password? Reset it <a href="#">here</a>.</p>
+            <p>New user? Sign up <a href="{% url 'register' %}">here</a>.</p>
+        </div>
     </form>
 {% endblock content %}
     

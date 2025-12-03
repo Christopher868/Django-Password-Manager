@@ -9,11 +9,17 @@
 {% block header %}{% endblock header %}
 <!-- Registration page content -->
 {% block content %}
+
+    <!-- User registration form -->
     <form id="register-form" action="{% url 'register' %}" method="POST" data-check-img-url ="{% static 'images/Green-Checkmark.svg' %}" data-x-img-url ="{% static 'images/Red-X.svg' %}">
         <h1 id="register-header">Register</h1>
         {% csrf_token %}
-        <div class="input-container"></div>
+        <div class="input-container">
             <input type="text" name="username" id="username" placeholder="Enter username" required>
+        </div>
+
+        <div class="input-container">
+            <input type="email" name="email" id="email" placeholder="Enter email" required>
         </div>
 
         <div class="input-container">
@@ -28,7 +34,7 @@
 
         <div id="register-btn-container">
             <button type="button"><a class="button-size" href="{% url 'login' %}">Cancel</a></button>
-            <button id="register-btn" class="button-size" type="submit" disabled>Register</button>
+            <button id="register-btn" class="button-size disable-effects" type="submit" disabled>Register</button>
         </div>
     </form>
 {% endblock content %}
