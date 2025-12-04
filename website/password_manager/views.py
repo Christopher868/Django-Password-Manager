@@ -15,8 +15,8 @@ def index(request):
     # send_mail(
     # 'Test Subject from Django',
     # 'This is the test message body.',
-    # settings.DEFAULT_FROM_EMAIL, # Uses the sender address you configured
-    # ['christopherhicks868@gmail.com'], # Replace with an actual recipient email
+    # settings.DEFAULT_FROM_EMAIL,
+    # ['christopherhicks868@gmail.com'],
     # fail_silently=False,
     # )
     return render(request, 'index.html', {})
@@ -75,7 +75,7 @@ def userRegistration(request):
     
 
 
-# View for letting user edit their own information
+# View for letting user edit their own account information once logged in
 def userAccount(request):
     if not request.user.is_authenticated:
         messages.error(request, "Must be logged into to view account information.")
@@ -87,6 +87,10 @@ def userAccount(request):
                 form.save()
                 messages.success(request, "Changes to profile saved")
                 return redirect("user-account")
+            else:
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"{error}")
         else:
             form = UpdateUserForm(instance=request.user)
         return render(request, 'accounts/user-account.html', {"form":form})
@@ -106,6 +110,10 @@ def userChangePassword(request):
                 update_session_auth_hash(request, user)
                 messages.success(request, "Password successfully changed!")
                 return redirect("user-account")
+            else:
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"{error}")
         else:
             form = PasswordChangeForm(request.user)
 

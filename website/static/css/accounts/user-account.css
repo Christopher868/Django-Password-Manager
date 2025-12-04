@@ -120,3 +120,8 @@
 .button-size {
     padding: .5rem 0;
 }
+
+small {
+    text-align: left;
+    width: 85%;
+}

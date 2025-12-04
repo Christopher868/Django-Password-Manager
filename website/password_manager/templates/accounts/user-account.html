@@ -11,13 +11,15 @@
 
     <!-- User Information form -->
     <form id="account-form" action="{% url 'user-account' %}" method="POST">
-        <h1 id="account-header">Account Info</h1>
+        <h1 id="account-header">Account<br>Information</h1>
         {% csrf_token %}
         <div class="input-container">
+            <small>Username</small>
             {{ form.username }}
         </div>
 
         <div class="input-container">
+            <small>Email</small>
             {{ form.email }}
         </div>
         <button id="change-pwd-btn" class="button-size" type="button"><a href="{% url 'change-password' %}">Change Password</a></button>
