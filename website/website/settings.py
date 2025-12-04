@@ -5,7 +5,7 @@ import environ
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Setting up Django Environ
-env = environ.Env(DEBUG=(bool, False))
+env = environ.Env(DEBUG=(bool, False), ALLOWED_HOSTS=(str, '127.0.0.1,localhost'))
 
 environ.Env.read_env(str(BASE_DIR / '.env'))
 
@@ -17,8 +17,11 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
+SITE_ID = 1
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.231']
+host_string = env('ALLOWED_HOSTS')
+print(host_string.split(','))
+ALLOWED_HOSTS = host_string.split(',')
 
 
 # Application definition
@@ -30,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'password_manager'
 ]
 

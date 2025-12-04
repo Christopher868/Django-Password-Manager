@@ -17,6 +17,7 @@
         
         <input type="text" name="username" id="username" placeholder="Enter username" required>
         <input type="password" name="password" id="password" placeholder="Enter password" required>
+        
         <div id="login-btn-container">
             <button type="button"><a class="button-size" href="{% url 'index' %}">Cancel</a></button>
             <button class="button-size" type="submit">Login</button>
@@ -24,7 +25,7 @@
 
         <!-- Register and reset password links -->
         <div id="login-info-container">
-            <p>Forgot your password? Reset it <a href="#">here</a>.</p>
+            <p>Forgot your password? Reset it <a href="{% url 'password_reset' %}">here</a>.</p>
             <p>New user? Sign up <a href="{% url 'register' %}">here</a>.</p>
         </div>
     </form>

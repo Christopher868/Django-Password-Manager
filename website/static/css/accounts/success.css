@@ -1,0 +1,52 @@
+#sent-msg-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    color: #294659;
+    text-align: center;
+}
+
+#sent-msg-container h2{
+    font-size: 2rem;
+    font-weight: bolder;
+    
+}
+
+#sent-msg-container p {
+    max-width: 600px;
+    width: 90%;
+    font-weight: 600;
+    line-height: 1.5rem;
+}
+
+#sent-msg-container button {
+    min-width: 100px;
+    max-width: 300px;
+    width: 90%;
+    background-color: #294659;
+    border-radius: .5rem;
+    border:1px solid black;
+    box-shadow: 0px 0px 2px black;
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+    text-shadow: 1px 1px 4px black;
+    &:hover{
+        box-shadow: 2px 2px 10px black;
+        cursor: pointer;
+    }
+    &:active {
+        box-shadow: inset 2px 2px 10px black;
+    }
+}
+
+#sent-msg-container a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.button-size {
+    padding: .5rem 0;
+}
