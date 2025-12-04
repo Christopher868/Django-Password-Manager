@@ -4,16 +4,22 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from .forms import CustomUserCreationForm, UpdateUserForm
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 
 # View for index home page
 def index(request):
-    if(request.user):
-        username = request.user.username
-        return render(request, 'index.html', {'username':username})
-    else:
-        return render(request, 'index.html', {})
+   
+    # send_mail(
+    # 'Test Subject from Django',
+    # 'This is the test message body.',
+    # settings.DEFAULT_FROM_EMAIL, # Uses the sender address you configured
+    # ['christopherhicks868@gmail.com'], # Replace with an actual recipient email
+    # fail_silently=False,
+    # )
+    return render(request, 'index.html', {})
 
 
 # View for login page
