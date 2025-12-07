@@ -20,7 +20,6 @@ DEBUG = env('DEBUG')
 SITE_ID = 1
 
 host_string = env('ALLOWED_HOSTS')
-print(host_string.split(','))
 ALLOWED_HOSTS = host_string.split(',')
 
 
@@ -34,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'password_manager'
+    'password_manager',
 ]
 
 MIDDLEWARE = [

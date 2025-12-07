@@ -4,25 +4,31 @@
 <!-- Page specific head elements -->
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <title>Password Manager</title>
+    <title>Password Manager Homepage</title>
 {% endblock head %}
 
 <!-- Index page content -->
 {% block content %}
     <section id="new-accounts-section">
-        <h2 id="new-accounts-header">New Accounts &uArr;</h2>
+        <h2 id="new-accounts-header">New Accounts</h2>
         <div id="new-accounts-container">
             <div class="new-account">
-                <p><a class="saved-account-link" href="#">Account Name &rArr;</a></p>
+                <p><a class="saved-account-link" href="#">Account Name</a></p>
             </div>
         </div>
     </section>
     <section id="accounts-section">
         <h2 id="accounts-header">Accounts</h2>
         <div id="account-container-content">
-            <input type="search" name="account-search" id="account-search" placeholder="Search Accounts">
+            <input type="search" name="account-search" id="account-search" placeholder="Search Accounts By Name">
             <div id="accounts-container">
                 <div class="account">
+                    <p><a class="saved-account-link" href="#">Account Name &rArr;</a><a href="#"></a></p>
+                </div>
+                <div class="account">
+                    <p><a class="saved-account-link" href="#">Account Name &rArr;</a></p>
+                </div>
+                <div class="account">
                     <p><a class="saved-account-link" href="#">Account Name &rArr;</a></p>
                 </div>
                 <div class="account">
@@ -31,10 +37,15 @@
                 <div class="account">
                     <p><a class="saved-account-link" href="#">Account Name &rArr;</a></p>
                 </div>
+                
+                
+            </div>
+            <div id="accounts-btn-container">
+                <button><a href="#">Add Account</a></button>
             </div>
         </div>
     </section>
-    
+    {% block script %}<script type="module" src="{% static 'js/index.js' %}"></script>{% endblock script %}
 {% endblock content %}
     
 

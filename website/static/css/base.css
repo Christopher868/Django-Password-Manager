@@ -340,3 +340,8 @@ footer {
 .disable-effects {
     pointer-events: none !important;
 }
+
+
+.fit-content {
+    height: fit-content !important;
+}
