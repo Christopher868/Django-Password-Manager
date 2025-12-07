@@ -11,14 +11,6 @@ from django.conf import settings
 
 # View for index home page
 def index(request):
-   
-    # send_mail(
-    # 'Test Subject from Django',
-    # 'This is the test message body.',
-    # settings.DEFAULT_FROM_EMAIL,
-    # ['christopherhicks868@gmail.com'],
-    # fail_silently=False,
-    # )
     return render(request, 'index.html', {})
 
 
@@ -30,7 +22,6 @@ def userLogin(request):
     else:
         if request.method == "POST":
             form = AuthenticationForm(request, data=request.POST)
-
             if form.is_valid():
                 user = form.get_user()
                 login(request, user)
@@ -60,7 +51,6 @@ def userRegistration(request):
     else:
         if request.method == "POST":
             form = CustomUserCreationForm(request.POST)
-
             if form.is_valid():
                 user = form.save()
                 login(request, user)
