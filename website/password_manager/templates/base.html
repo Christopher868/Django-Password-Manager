@@ -37,8 +37,9 @@
                 {% else %}
                 <li class="sidebar-item" id="sidebar-login-link"><a class="sidebar-link" href="{% url 'login' %}">Login</a></li>
                 {% endif %}
-                <li class="sidebar-item"><a class="sidebar-link" href="{% url 'index' %}">Homepage</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="{% url 'index' %}">Home</a></li>
                 <li class="sidebar-item"><a class="sidebar-link" href="{% url 'user-account' %}">Account</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#">Passwords</a></li>
                 <li class="sidebar-item"><a class="sidebar-link" href="">About Us</a></li>
                 {% if user.is_authenticated %}
                 <li class="sidebar-item"><a class="sidebar-link" href="{% url 'logout' %}">Logout</a></li>

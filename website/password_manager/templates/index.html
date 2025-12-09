@@ -9,42 +9,31 @@
 
 <!-- Index page content -->
 {% block content %}
-    <section id="new-accounts-section">
-        <h2 id="new-accounts-header">New Accounts</h2>
-        <div id="new-accounts-container">
-            <div class="new-account">
-                <p><a class="saved-account-link" href="#">Account Name</a></p>
-            </div>
+    <section id="home-img-container">
+        <img src="{% static 'images/pm-website-bg.jpg' %}" alt="Index page header img displaying person on a password manager website">
+    </section>
+    <section id="pwd-manager-intro">
+        <div id="intro-text-container">
+           <p>With our Password Manager, your login credentials aren't just saved; they are securely encrypted so that only you can access them not us.
+             This gives you the freedom to log in and access your passwords from anywhere.
+              Say goodbye to the frustration of the 'Forgot Password' loop every time you try to access an old account.
+               Furthermore, you can finally break the dangerous habit of reusing the same password across multiple websites.
+                Now, you can easily use unique, complex passwords for every single site without the burden of having to memorize them all.</p>
         </div>
     </section>
-    <section id="accounts-section">
-        <h2 id="accounts-header">Accounts</h2>
-        <div id="account-container-content">
-            <input type="search" name="account-search" id="account-search" placeholder="Search Accounts By Name">
-            <div id="accounts-container">
-                <div class="account">
-                    <p><a class="saved-account-link" href="#">Account Name &rArr;</a><a href="#"></a></p>
-                </div>
-                <div class="account">
-                    <p><a class="saved-account-link" href="#">Account Name &rArr;</a></p>
-                </div>
-                <div class="account">
-                    <p><a class="saved-account-link" href="#">Account Name &rArr;</a></p>
-                </div>
-                <div class="account">
-                    <p><a class="saved-account-link" href="#">Account Name &rArr;</a></p>
-                </div>
-                <div class="account">
-                    <p><a class="saved-account-link" href="#">Account Name &rArr;</a></p>
-                </div>
-                
-                
-            </div>
-            <div id="accounts-btn-container">
-                <button><a href="#">Add Account</a></button>
-            </div>
+    <section id="pwd-section">
+        <div><a href="#">View Passwords</a></div>
+        <div><a href="#">Add Password</a></div>
+    </section>
+    <h3 class="section-header">About Us</h3>
+    <section id="about-section">
+        <div id="about-text-container">
+            <p>
+
+            </p>
         </div>
     </section>
+
     {% block script %}<script type="module" src="{% static 'js/index.js' %}"></script>{% endblock script %}
 {% endblock content %}
     

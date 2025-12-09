@@ -55,7 +55,7 @@
 /* change password btn container styles */
 #change-pwd-btn-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
     justify-content: center;
     align-items: center;
     gap: .5rem;
@@ -64,8 +64,8 @@
 }
 
 #change-pwd-btn-container button {
-    min-width: 100px;
-    width: 48%;
+    min-width: 150px;
+    flex: 1 1 0;
     background-color: #294659;
     border-radius: .5rem;
     border:1px solid black;
