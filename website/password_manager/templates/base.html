@@ -40,7 +40,7 @@
                 <li class="sidebar-item"><a class="sidebar-link" href="{% url 'index' %}">Home</a></li>
                 <li class="sidebar-item"><a class="sidebar-link" href="{% url 'user-account' %}">Account</a></li>
                 <li class="sidebar-item"><a class="sidebar-link" href="#">Passwords</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="">About Us</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="#about-section">About Us</a></li>
                 {% if user.is_authenticated %}
                 <li class="sidebar-item"><a class="sidebar-link" href="{% url 'logout' %}">Logout</a></li>
                 {% endif %}
@@ -64,7 +64,7 @@
     <main>
         <section id="base-content">
         {% block content %}
-            <h3>Hello</h3>
+            
         {% endblock content %}
         </section>
     </main>

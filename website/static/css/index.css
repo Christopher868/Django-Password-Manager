@@ -64,6 +64,7 @@
     text-align: center;
     &:hover {
         box-shadow: 2px 2px 4px black;
+        cursor: default;
     }
 }
 
@@ -132,6 +133,7 @@
     text-align: center;
     &:hover {
         box-shadow: 2px 2px 4px black;
+        cursor: default;
     }
 }
 
