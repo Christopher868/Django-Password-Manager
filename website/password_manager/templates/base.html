@@ -39,7 +39,7 @@
                 {% endif %}
                 <li class="sidebar-item"><a class="sidebar-link" href="{% url 'index' %}">Home</a></li>
                 <li class="sidebar-item"><a class="sidebar-link" href="{% url 'user-account' %}">Account</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="#">Passwords</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="{% url 'view-passwords' %}">Passwords</a></li>
                 <li class="sidebar-item"><a class="sidebar-link" href="#about-section">About Us</a></li>
                 {% if user.is_authenticated %}
                 <li class="sidebar-item"><a class="sidebar-link" href="{% url 'logout' %}">Logout</a></li>

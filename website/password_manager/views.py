@@ -90,7 +90,7 @@ def userAccount(request):
 # View for letting user change password
 def userChangePassword(request):
     if not request.user.is_authenticated:
-        messages.error(request, "Log in to change password!")
+        messages.error(request, "Login to change password!")
         return redirect('login')
     else:
         if request.method == "POST":
@@ -108,3 +108,12 @@ def userChangePassword(request):
             form = PasswordChangeForm(request.user)
 
         return render(request, 'accounts/change-pwd.html', {"form":form})
+    
+
+
+def viewPasswords(request):
+    if not request.user.is_authenticated:
+        messages.error(request, "Login to view passwords!")
+        return redirect('login')
+    else:
+        return render(request, 'passwords.html', {})
