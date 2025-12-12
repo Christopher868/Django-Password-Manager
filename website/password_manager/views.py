@@ -110,10 +110,19 @@ def userChangePassword(request):
         return render(request, 'accounts/change-pwd.html', {"form":form})
     
 
-
+# View for page where users can view their saved accounts
 def viewAccounts(request):
     if not request.user.is_authenticated:
         messages.error(request, "Login to view accounts!")
         return redirect('login')
     else:
         return render(request, 'view-accounts.html', {})
+    
+
+# View for page where users can add new saved account
+def addAccount(request):
+    if not request.user.is_authenticated:
+        messages.error(request, "Login to add new saved account!")
+        return redirect('login')
+    else:
+        return render(request, 'add-account.html', {})

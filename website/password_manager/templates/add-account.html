@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Add new account page specific head elements -->
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/add-account.css' %}">
+<title>Add New Account</title>
+{% endblock head %}
+
+<!-- Add new account page content -->
+ {% block content %}
+
+ <!-- Form for user to add new account -->
+ <form id="new-account-form" action="{% url 'add-account' %}" method="POST">
+    <h2>Add<br>New Account</h2>
+    {% csrf_token %}
+
+    <input type="text" name="account-title" id="account-title" placeholder="Enter name for account" required>
+    <input type="text" name="email-or-username" id="email-or-username" placeholder="Enter username or email" required>
+    <input type="text" name="password" id="password" placeholder="Enter password for account" required>
+
+    <div id="form-btn-container">
+        <button type="button"><a class="button-size" href="{% url 'view-accounts' %}">Cancel</a></button>
+        <button class="button-size" type="submit">Add Account</button>
+    </div>
+    
+ </form>
+ 
+ {% endblock content %}
+
+
+ <!-- Script specific for this page -->
+ {% block script %} <script type="module" src="{% static 'js/add-account.js' %}"></script> {% endblock script %}
+
