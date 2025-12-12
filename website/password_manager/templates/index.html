@@ -9,9 +9,12 @@
 
 <!-- Index page content -->
 {% block content %}
+    <!-- Homepage Img container -->
     <section id="home-img-container">
         <img src="{% static 'images/pm-website-bg.jpg' %}" alt="Index page header img displaying person on a password manager website">
     </section>
+
+    <!-- Website intro container -->
     <section id="pwd-manager-intro">
         <div id="intro-text-container">
            <p>With our Password Manager, your login credentials aren't just saved; they are securely encrypted so that only you can access them not us.
@@ -21,10 +24,14 @@
                 Now, you can easily use unique, complex passwords for every single site without the burden of having to memorize them all.</p>
         </div>
     </section>
+
+    <!-- View and add Account section of homepage -->
     <section id="pwd-section">
-        <div><a href="#">View Passwords</a></div>
-        <div><a href="#">Add Password</a></div>
+        <div><a href="{% url 'view-accounts' %}">View Saved Accounts</a></div>
+        <div><a href="#">Add Account</a></div>
     </section>
+
+    <!-- About Us section for homepage -->
     <h3 class="section-header">About Us</h3>
     <section id="about-section">
         <div id="about-text-container">
@@ -34,7 +41,6 @@
         </div>
     </section>
 
-    {% block script %}<script type="module" src="{% static 'js/index.js' %}"></script>{% endblock script %}
 {% endblock content %}
     
 

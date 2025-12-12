@@ -111,9 +111,9 @@ def userChangePassword(request):
     
 
 
-def viewPasswords(request):
+def viewAccounts(request):
     if not request.user.is_authenticated:
-        messages.error(request, "Login to view passwords!")
+        messages.error(request, "Login to view accounts!")
         return redirect('login')
     else:
-        return render(request, 'passwords.html', {})
+        return render(request, 'view-accounts.html', {})

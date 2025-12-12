@@ -38,8 +38,8 @@
                 <li class="sidebar-item" id="sidebar-login-link"><a class="sidebar-link" href="{% url 'login' %}">Login</a></li>
                 {% endif %}
                 <li class="sidebar-item"><a class="sidebar-link" href="{% url 'index' %}">Home</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="{% url 'user-account' %}">Account</a></li>
-                <li class="sidebar-item"><a class="sidebar-link" href="{% url 'view-passwords' %}">Passwords</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="{% url 'user-account' %}">Your Account</a></li>
+                <li class="sidebar-item"><a class="sidebar-link" href="{% url 'view-accounts' %}">Saved Accounts</a></li>
                 <li class="sidebar-item"><a class="sidebar-link" href="#about-section">About Us</a></li>
                 {% if user.is_authenticated %}
                 <li class="sidebar-item"><a class="sidebar-link" href="{% url 'logout' %}">Logout</a></li>
@@ -49,6 +49,8 @@
         </aside>
 
         {% endblock header %}
+
+        <!-- if statement for displaying messages from backend if there are any -->
         {% if messages %}
         <div id="message-container">
             <ul id="messages">
@@ -89,7 +91,7 @@
         </section>
     </footer>
     
-    <script src="{% static 'js/base.js' %}"></script>
+    <script type="module" src="{% static 'js/base.js' %}"></script>
     {% block script %}{% endblock script %}
 </body>
 </html>

@@ -143,7 +143,7 @@ footer {
     overflow: hidden;
     transition: width .2s ease-in-out;
     height: 100vh;
-    width: 200px;
+    width: 300px;
     text-shadow: 1px 1px 4px black;
     @media (max-width:600px) {
         width: 100%;

@@ -11,16 +11,21 @@
 <!-- Passwords page specific content -->
  {% block content %}
 
+    <!-- Searchbar for filtering through saved accounts -->
     <search id="search-container">
         <input type="search" id="search" name="searach" placeholder="Search Accounts By Name">
     </search>
  
-
+    <!-- Container user's saved accounts section -->
     <section id="pwds-container">
-        <h2>Your Passwords</h2>
+        <h2>Saved Accounts</h2>
+        
+        <!-- Add new account button -->
         <div id="pwds-btn-container">
             <a href="#"><svg id="plus-symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg></a>
         </div>
+
+        <!-- User's saved accounts -->
         <div id="pwds">
             <div class="pwd">
                 <a href="#"><h4>Site Name</h4></a>
