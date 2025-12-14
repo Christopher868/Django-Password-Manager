@@ -17,6 +17,8 @@ urlpatterns = [
     path('view-all-accounts/', views.viewAllAccounts, name="view-all-accounts"),
     path('add-new-account/', views.addAccount, name="add-account"),
     path('view-account/<int:account_id>/', views.viewAccount, name="view-account"),
+    path('confirm-delete/<int:account_id>/', views.confirmDelete, name="delete-confirm"),
+    path('delete/<int:account_id>/', views.delete, name="delete"),
     path('api/retrieve-profile/', views.retrieve_user_profile, name="retrieve-profile"),
     
 ]

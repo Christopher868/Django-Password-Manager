@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Page specific head elements -->
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/delete-confirm.css' %}">
+    <title>Confirm Delete</title>
+{% endblock head %}
+
+
+<!-- Confirm delete page specific content -->
+ {% block content %}    
+    <section id="acc-info-container">
+        <h2 id="acc-info-header">{{ account }}</h2>
+        <p>Are you sure you want to delete this account?</p>
+        <div id="delete-btn-container">
+            <button type="button"><a class="button-size" href="{% url 'view-all-accounts' %}">Cancel</a></button>
+            <button class="button-size" type="submit"><a href="{% url 'delete' account.id %}">Delete</a></button>
+        </div>
+    </section>
+ {% endblock content %}

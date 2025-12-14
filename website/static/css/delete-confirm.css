@@ -1,0 +1,89 @@
+#acc-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .75rem;
+    width: 80%;
+    min-width:275px;
+    max-width: 450px;
+    box-shadow: 5px 5px 10px black;
+    padding: 5rem 0;
+    border-radius: .5rem;
+    @media (max-width:600px) {
+        padding: 2rem 0;
+    }
+}
+
+#acc-info-header {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 2.5rem;
+    color: #294659;
+    text-shadow: 0px 0px 1px black;
+    margin-bottom: 30px;
+    &:hover {
+        cursor:default;
+    }
+}
+
+#acc-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    gap: 1rem;
+    
+}
+
+#acc-info-container p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .25rem;
+    width: 90%;
+    @media (max-width:600px) {
+        font-size: .80rem;
+    }
+
+}
+
+
+#acc-info-container button {
+    min-width: 150px;
+    flex: 1 1 0;
+    background-color: #294659;
+    border-radius: .5rem;
+    border:1px solid black;
+    box-shadow: 0px 0px 2px black;
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+    text-shadow: 1px 1px 4px black;
+    &:hover{
+        box-shadow: 2px 2px 10px black;
+        cursor: pointer;
+    }
+    &:active {
+        box-shadow: inset 2px 2px 10px black;
+    }
+}
+
+#acc-info-container button a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: .5rem 0;
+}
+
+#delete-btn-container {
+    display: flex;
+    flex-wrap:wrap-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    width: 90%;
+    min-width: 200px;
+}

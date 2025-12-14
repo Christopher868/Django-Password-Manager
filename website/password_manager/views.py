@@ -172,6 +172,18 @@ def addAccount(request):
             return render(request, 'add-account.html', {})
     
 
+# Confirms that user wants to delete a saved account
+def confirmDelete(request, account_id):
+    savedAccount = SavedAccount.objects.get(id=account_id)
+    return render(request, 'delete-confirm.html', {'account':savedAccount})
+
+
+# Deletes user's selected saved account
+def delete(request, account_id):
+    savedAccount = SavedAccount.objects.get(id=account_id)
+    savedAccount.delete()
+    return redirect('view-all-accounts')
+
 
 # Api endpoint for retrieving user password
 def retrieve_user_profile(request):
@@ -189,4 +201,3 @@ def retrieve_user_profile(request):
             return JsonResponse(data)
         else:
             return JsonResponse({'error': 'Only get requested allowed'}, status=405)
-    
