@@ -142,7 +142,6 @@ def viewAllAccounts(request):
 # View to view saved account information
 def viewAccount(request, account_id):
     account = SavedAccount.objects.get(id=account_id)
-    print(account)
     return render(request, 'view-account.html', {'account': account})
 
 

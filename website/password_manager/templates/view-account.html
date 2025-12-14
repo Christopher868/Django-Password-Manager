@@ -10,8 +10,17 @@
 
 <!-- View saved account page specific content -->
  {% block content %}
-    <p id="password">{{ account.encrypted_password }}</p>
     <p class="fast-hidden" id="iv">{{ account.iv }}</p>
+    
+    <section id="acc-info-container">
+        <h2 id="acc-info-header">{{ account }}</h2>
+        <div id="acc-info">
+            <p><span class="info-header">Account Username or Email</span><span class="info">{{ account.username_or_email }}<span></p>
+            <p><span class="info-header">Account Password</span><span class="info" id="password">fkjfdkfjsdklfjkldsjfdfdsfdfsdfslksdfksdjklfjsklfksdfdsdfdsfdsfdsfsf</span></p>
+        </div>
+        <button><a href="{% url 'view-all-accounts' %}">Back</a></button>
+    </section>
+    
 
     {% block script %}<script type="module" src="{% static 'js/view-account.js' %}"></script>{% endblock script %}
  {% endblock content %}
