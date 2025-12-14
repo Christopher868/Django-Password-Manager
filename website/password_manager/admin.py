@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import SavedAccount
+from .models import SavedAccount, UserProfile
 
 # Register your models here.
 class SavedAccountAdmin(admin.ModelAdmin):
-    readonly_fields = ('user', 'encrypted_username_or_email', 'encrypted_password', 'key_salt', 'iv', 'created_at')
-admin.site.register(SavedAccount, )
+    readonly_fields = ('user','account_title', 'username_or_email', 'encrypted_password', 'iv', 'created_at')
+
+admin.site.register(SavedAccount, SavedAccountAdmin)
+admin.site.register(UserProfile)

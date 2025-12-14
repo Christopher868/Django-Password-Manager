@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Page specific head elements -->
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/view-account.css' %}">
+    <title>Viewing Saved Account</title>
+{% endblock head %}
+
+
+<!-- View saved account page specific content -->
+ {% block content %}
+    <p id="password">{{ account.encrypted_password }}</p>
+    <p class="fast-hidden" id="iv">{{ account.iv }}</p>
+
+    {% block script %}<script type="module" src="{% static 'js/view-account.js' %}"></script>{% endblock script %}
+ {% endblock content %}

@@ -14,6 +14,7 @@
     <form id="register-form" action="{% url 'register' %}" method="POST" data-check-img-url ="{% static 'images/Green-Checkmark.svg' %}" data-x-img-url ="{% static 'images/Red-X.svg' %}">
         <h1 id="register-header">Register</h1>
         {% csrf_token %}
+        <input type="hidden" name="profile-data" value="">
         <div class="input-container">
             <input type="text" name="username" id="username" placeholder="Enter username" required>
         </div>
@@ -25,12 +26,22 @@
         <div class="input-container">
             <input type="password" name="password1" id="password1" placeholder="Enter password" required>
             <small id="password1-status-msg">Password must be atleast 8 characters <img id="password1-status-symbol" class="status-symbol" src="{% static 'images/Red-X.svg' %}" alt="Field status symbol"></small>
+            <small>This password will be used to login your account</small>
         </div>    
 
         <div class="input-container">
             <input type="password" name="password2" id="password2" placeholder="Confirm password" required>
-            <small id="password2-status-msg" class="">Passwords must match <img id="password2-status-symbol" class="status-symbol" src="{% static 'images/Red-X.svg' %}" alt="Field status symbol"></small>
+            <small id="password2-status-msg" class="">Must match user password <img id="password2-status-symbol" class="status-symbol" src="{% static 'images/Red-X.svg' %}" alt="Field status symbol"></small>
         </div>  
+         <div class="input-container">
+            <input type="password" name="m-password" id="m-password" placeholder="Enter master password" required>
+            <small id="m-status-msg" class="">Master password must be atleast 8 characters <img id="m-status-symbol" class="status-symbol" src="{% static 'images/Red-X.svg' %}" alt="Field status symbol"></small>
+            <small>You will be required to enter this password everytime you access stored accounts.<br>It is not able to be reset so make it something you will remember. </small>
+        </div> 
+         <div class="input-container">
+            <input type="password" name="m-password2" id="m-password2" placeholder="Confirm master password" required>
+            <small id="m2-status-msg" class="">Must match master password <img id="m2-status-symbol" class="status-symbol" src="{% static 'images/Red-X.svg' %}" alt="Field status symbol"></small>
+        </div> 
 
         <div id="register-btn-container">
             <button type="button"><a class="button-size" href="{% url 'login' %}">Cancel</a></button>
@@ -38,4 +49,4 @@
         </div>
     </form>
 {% endblock content %}
-{% block script %}<script src="{% static 'js/register.js' %}"></script>{% endblock script %}
+{% block script %}<script type="module" src="{% static 'js/register.js' %}"></script>{% endblock script %}

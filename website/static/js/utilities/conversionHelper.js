@@ -1,6 +1,8 @@
-export function base64ToArrayBuffer(base64) {
-    const binaryString = atob(base64);
-    
+export const enc = new TextEncoder();
+export const dec = new TextDecoder();
+
+export function base64ToArrayBuffer(base64String) {
+    const binaryString = atob(base64String);
     const len = binaryString.length;
     const bytes = new Uint8Array(len);
     
@@ -8,17 +10,16 @@ export function base64ToArrayBuffer(base64) {
         bytes[i] = binaryString.charCodeAt(i);
     }
     
-    return bytes.buffer;
+    return bytes;
 }
 
 export function arrayBufferToBase64(buffer) {
-    let binary = '';
     const bytes = new Uint8Array(buffer);
-    const len = bytes.byteLength;
+    let binary = '';
     
-    for (let i = 0; i < len; i++) {
-        binary += String.fromCharCode(bytes[i]);
-    }
+    bytes.forEach(byte => {
+        binary += String.fromCharCode(byte);
+    });
     
     return btoa(binary);
 }

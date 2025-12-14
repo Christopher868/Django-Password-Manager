@@ -98,6 +98,10 @@
 }
 small {
     font-size: .65rem;
+    align-self:end;
+    text-align: right;
+    width: 90%;
+    padding: 0 2rem;
 }
 
 /* field status stylings */
