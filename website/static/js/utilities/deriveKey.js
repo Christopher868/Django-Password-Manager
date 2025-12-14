@@ -150,7 +150,7 @@ export async function decryptSecret(masterPassword, secret, iv){
         return dec.decode(plaintextBuffer)
 
     } catch (err) {
-        console.err("Decryption failed:", err)
+        console.error("Decryption failed:", err)
         return null;
     }
 }
