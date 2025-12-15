@@ -18,6 +18,7 @@ def index(request):
 
 # View for login page
 def userLogin(request):
+    # Checks if user is authenticated
     if request.user.is_authenticated:
         messages.info(request, "You are already logged in!")
         return redirect('index')
@@ -38,15 +39,21 @@ def userLogin(request):
 
 # View for logging out user
 def userLogout(request):
-    logout(request)
-    messages.success(request, "Successfully logged out!")
-    referrer = request.META.get('HTTP_REFERER')
-    return redirect(referrer)
+    # Checks if user is authenticated
+    if not request.user.is_authenticated:
+        messages.error(request, 'Must be logged in to logout')
+        return redirect('login')
+    else:
+        logout(request)
+        messages.success(request, "Successfully logged out!")
+        referrer = request.META.get('HTTP_REFERER')
+        return redirect(referrer)
 
 
 
 # View for registering user
 def userRegistration(request):
+    # Checks if user is authenticated
     if request.user.is_authenticated:
         messages.info(request, "You are already logged in!")
         return redirect('index')
@@ -84,6 +91,7 @@ def userRegistration(request):
 
 # View for letting user edit their own account information once logged in
 def userAccount(request):
+    # Checks if user is authenticated
     if not request.user.is_authenticated:
         messages.error(request, "Must be logged into to view account information.")
         return redirect('login')
@@ -107,6 +115,7 @@ def userAccount(request):
 
 # View for letting user change password
 def userChangePassword(request):
+    # Checks if user is authenticated
     if not request.user.is_authenticated:
         messages.error(request, "Login to change password!")
         return redirect('login')
@@ -131,6 +140,7 @@ def userChangePassword(request):
 
 # View for page where users can view their saved accounts
 def viewAllAccounts(request):
+    # Checks if user is authenticated
     if not request.user.is_authenticated:
         messages.error(request, "Login to view accounts!")
         return redirect('login')
@@ -140,12 +150,18 @@ def viewAllAccounts(request):
     
 # View to view saved account information
 def viewAccount(request, account_id):
-    account = SavedAccount.objects.get(id=account_id)
-    return render(request, 'view-account.html', {'account': account})
+    # Checks if user is authenticated
+    if not request.user.is_authenticated:
+        messages.error(request, 'Must be logged into to view saved accounts')
+        return redirect('login')
+    else:
+        account = SavedAccount.objects.get(id=account_id)
+        return render(request, 'view-account.html', {'account': account})
 
 
 # View for page where users can add new saved account
 def addAccount(request):
+    # Checks if user is authenticated
     if not request.user.is_authenticated:
         messages.error(request, "Login to add new saved account!")
         return redirect('login')
@@ -171,35 +187,46 @@ def addAccount(request):
 
 # Confirms that user wants to delete a saved account
 def confirmDelete(request, account_id):
-    referer_url = request.META.get('HTTP_REFERER')
-
-    # Makes http referer is from view-all-accounts page and redirects if it is not 
-    if referer_url is None or not referer_url.endswith('view-all-accounts/'):
-        messages.error(request, 'Accounts must be deleted from the saved accounts page')
-        return redirect('view-all-accounts')
+    # Checks if user is authenticated
+    if not request.user.is_authenticated:
+        messages.error(request, "Must be logged into the delete accounts!")
+        return redirect('login')
     else:
-        savedAccount = SavedAccount.objects.get(id=account_id)
-        return render(request, 'delete-confirm.html', {'account':savedAccount})
+        referer_url = request.META.get('HTTP_REFERER')
+
+        # Makes http referer is from view-all-accounts page and redirects if it is not 
+        if referer_url is None or not referer_url.endswith('view-all-accounts/'):
+            messages.error(request, 'Accounts must be deleted from the saved accounts page')
+            return redirect('view-all-accounts')
+        else:
+            savedAccount = SavedAccount.objects.get(id=account_id)
+            return render(request, 'delete-confirm.html', {'account':savedAccount})
 
 
 
 # Deletes user's selected saved account
 def delete(request, account_id):
-    # Checks to make sure page is being accessed from confirm delete page
-    referer_url = request.META.get('HTTP_REFERER')
-    if referer_url is not None:
-        referer_url = referer_url.split('/')
-        referer_url = referer_url[3]
     
-    # Sends error msg and redirects to view-all-accounts if http referer is not from confirm delete
-    if referer_url is None or referer_url != 'confirm-delete':
-        messages.error(request, 'Accounts must be deleted from the saved accounts page')
-        return redirect('view-all-accounts')
+    # Check if user is logged into an account
+    if not request.user.is_authenticated:
+        messages.error(request, "Must be logged into the delete accounts!")
+        return redirect('login')
     else:
-        savedAccount = SavedAccount.objects.get(id=account_id)
-        savedAccount.delete()
-        messages.success(request, 'Account deleted Successfully!')
-    return redirect('view-all-accounts')
+        # Checks to make sure page is being accessed from confirm delete page
+        referer_url = request.META.get('HTTP_REFERER')
+        if referer_url is not None:
+            referer_url = referer_url.split('/')
+            referer_url = referer_url[3]
+        
+        # Sends error msg and redirects to view-all-accounts if http referer is not from confirm delete
+        if referer_url is None or referer_url != 'confirm-delete':
+            messages.error(request, 'Accounts must be deleted from the saved accounts page')
+            return redirect('view-all-accounts')
+        else:
+            savedAccount = SavedAccount.objects.get(id=account_id)
+            savedAccount.delete()
+            messages.success(request, 'Account deleted Successfully!')
+        return redirect('view-all-accounts')
 
 
 # Api endpoint for retrieving user profile
