@@ -158,7 +158,7 @@ def addAccount(request):
             SavedAccount.objects.create(
                 user=request.user,
                 account_title = account_title,
-                username_or_email = secret_data['enc_username_or_email'],
+                encrypted_username_or_email = secret_data['enc_username_or_email'],
                 encrypted_password = secret_data['enc_password'],
                 iv = secret_data['validation_iv'],
             )
