@@ -9,7 +9,6 @@ from django.conf import settings
 from .models import UserProfile, SavedAccount
 from django.http import JsonResponse
 import json
-from django.forms.models import model_to_dict
 
 
 # View for index home page
@@ -153,16 +152,14 @@ def addAccount(request):
     else:
         if request.method == "POST":
             account_title = request.POST.get('account-title')
-            username_or_email = request.POST.get('email-or-username')
             secret_data = json.loads(request.POST.get('secret-data'))
-            print(secret_data)
 
             # Creates saved account
             SavedAccount.objects.create(
                 user=request.user,
                 account_title = account_title,
-                username_or_email = username_or_email,
-                encrypted_password = secret_data['ciphertext'],
+                username_or_email = secret_data['enc_username_or_email'],
+                encrypted_password = secret_data['enc_password'],
                 iv = secret_data['validation_iv'],
             )
             messages.success(request, "New account successfully added!")
@@ -174,18 +171,38 @@ def addAccount(request):
 
 # Confirms that user wants to delete a saved account
 def confirmDelete(request, account_id):
-    savedAccount = SavedAccount.objects.get(id=account_id)
-    return render(request, 'delete-confirm.html', {'account':savedAccount})
+    referer_url = request.META.get('HTTP_REFERER')
+
+    # Makes http referer is from view-all-accounts page and redirects if it is not 
+    if referer_url is None or not referer_url.endswith('view-all-accounts/'):
+        messages.error(request, 'Accounts must be deleted from the saved accounts page')
+        return redirect('view-all-accounts')
+    else:
+        savedAccount = SavedAccount.objects.get(id=account_id)
+        return render(request, 'delete-confirm.html', {'account':savedAccount})
+
 
 
 # Deletes user's selected saved account
 def delete(request, account_id):
-    savedAccount = SavedAccount.objects.get(id=account_id)
-    savedAccount.delete()
+    # Checks to make sure page is being accessed from confirm delete page
+    referer_url = request.META.get('HTTP_REFERER')
+    if referer_url is not None:
+        referer_url = referer_url.split('/')
+        referer_url = referer_url[3]
+    
+    # Sends error msg and redirects to view-all-accounts if http referer is not from confirm delete
+    if referer_url is None or referer_url != 'confirm-delete':
+        messages.error(request, 'Accounts must be deleted from the saved accounts page')
+        return redirect('view-all-accounts')
+    else:
+        savedAccount = SavedAccount.objects.get(id=account_id)
+        savedAccount.delete()
+        messages.success(request, 'Account deleted Successfully!')
     return redirect('view-all-accounts')
 
 
-# Api endpoint for retrieving user password
+# Api endpoint for retrieving user profile
 def retrieve_user_profile(request):
     if not request.user.is_authenticated:  
        return JsonResponse({'error': 'Login required'}, status=401)
@@ -200,4 +217,4 @@ def retrieve_user_profile(request):
             }
             return JsonResponse(data)
         else:
-            return JsonResponse({'error': 'Only get requested allowed'}, status=405)
+            return JsonResponse({'error': 'Only GET requested allowed'}, status=405)

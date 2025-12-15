@@ -8,7 +8,7 @@ from django.contrib.auth.hashers import make_password, check_password
 class SavedAccount(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     account_title = models.CharField(max_length=256)
-    username_or_email = models.CharField(max_length=255)
+    encrypted_username_or_email = models.CharField(max_length=255)
     encrypted_password = models.CharField(max_length=256)
     iv = models.CharField(max_length=256)
     created_at = models.DateTimeField(auto_now_add=True)

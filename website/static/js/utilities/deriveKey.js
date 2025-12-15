@@ -112,21 +112,28 @@ async function verifyMasterPassword(masterPassword){
 
 
 // Encrypts data before being sent to database
-export async function encryptSecret(masterPassword, secret){
+export async function encryptSecret(masterPassword, secretPassword, secretUsernameOrEmail){
     const derivedMasterKey = await verifyMasterPassword(masterPassword)
     if(derivedMasterKey === null){
         return null;
     } else {
         const iv = window.crypto.getRandomValues(new Uint8Array(12));
 
-        const ciphertextBuffer = await window.crypto.subtle.encrypt(
+        const encryptedPassword = await window.crypto.subtle.encrypt(
             { name: 'AES-GCM', iv: iv },
             derivedMasterKey,
-            enc.encode(secret)
+            enc.encode(secretPassword)
+        );
+
+         const encryptedUsernameOrEmail = await window.crypto.subtle.encrypt(
+            { name: 'AES-GCM', iv: iv },
+            derivedMasterKey,
+            enc.encode(secretUsernameOrEmail)
         );
 
         return {
-            ciphertext: arrayBufferToBase64(ciphertextBuffer),
+            enc_password: arrayBufferToBase64(encryptedPassword),
+            enc_username_or_email: arrayBufferToBase64(encryptedUsernameOrEmail),
             validation_iv: arrayBufferToBase64(iv.buffer)
         }
     }
