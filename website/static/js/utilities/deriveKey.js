@@ -109,24 +109,26 @@ export async function encryptSecret(masterPassword, secretPassword, secretUserna
     if(derivedMasterKey === null){
         return null;
     } else {
-        const iv = window.crypto.getRandomValues(new Uint8Array(12));
+        const passwordIv = window.crypto.getRandomValues(new Uint8Array(12));
+        const usernameOrEmailIv = window.crypto.getRandomValues(new Uint8Array(12));
 
         const encryptedPassword = await window.crypto.subtle.encrypt(
-            { name: 'AES-GCM', iv: iv },
+            { name: 'AES-GCM', iv: passwordIv },
             derivedMasterKey,
             enc.encode(secretPassword)
         );
 
          const encryptedUsernameOrEmail = await window.crypto.subtle.encrypt(
-            { name: 'AES-GCM', iv: iv },
+            { name: 'AES-GCM', iv: usernameOrEmailIv },
             derivedMasterKey,
             enc.encode(secretUsernameOrEmail)
         );
 
         return {
             enc_password: arrayBufferToBase64(encryptedPassword),
+            password_iv: arrayBufferToBase64(passwordIv.buffer),
             enc_username_or_email: arrayBufferToBase64(encryptedUsernameOrEmail),
-            validation_iv: arrayBufferToBase64(iv.buffer)
+            username_or_email_iv: arrayBufferToBase64(usernameOrEmailIv.buffer)
         }
     }
 }

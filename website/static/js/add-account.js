@@ -17,7 +17,7 @@ newAccountForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     // Getting master key then if successfull submitting form
-    const data = await encryptSecret(mPassword.value, password.value, usernameOrEmail.value)
+    const data = await encryptSecret(mPassword.value.trim(), password.value.trim(), usernameOrEmail.value.trim())
     if(data === null){
         alert('Master key was incorrect encryption failed! Try again')
     } else {

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
@@ -16,8 +16,9 @@ def index(request):
     return render(request, 'index.html', {})
 
 
+
 # View for login page
-def userLogin(request):
+def user_login(request):
     # Checks if user is authenticated
     if request.user.is_authenticated:
         messages.info(request, "You are already logged in!")
@@ -38,7 +39,7 @@ def userLogin(request):
 
 
 # View for logging out user
-def userLogout(request):
+def user_logout(request):
     # Checks if user is authenticated
     if not request.user.is_authenticated:
         messages.error(request, 'Must be logged in to logout')
@@ -52,7 +53,7 @@ def userLogout(request):
 
 
 # View for registering user
-def userRegistration(request):
+def user_registration(request):
     # Checks if user is authenticated
     if request.user.is_authenticated:
         messages.info(request, "You are already logged in!")
@@ -90,7 +91,7 @@ def userRegistration(request):
 
 
 # View for letting user edit their own account information once logged in
-def userAccount(request):
+def user_account(request):
     # Checks if user is authenticated
     if not request.user.is_authenticated:
         messages.error(request, "Must be logged into to view account information.")
@@ -114,7 +115,7 @@ def userAccount(request):
 
 
 # View for letting user change password
-def userChangePassword(request):
+def user_change_password(request):
     # Checks if user is authenticated
     if not request.user.is_authenticated:
         messages.error(request, "Login to change password!")
@@ -138,8 +139,9 @@ def userChangePassword(request):
         return render(request, 'accounts/change-pwd.html', {"form":form})
     
 
+
 # View for page where users can view their saved accounts
-def viewAllAccounts(request):
+def view_all_accounts(request):
     # Checks if user is authenticated
     if not request.user.is_authenticated:
         messages.error(request, "Login to view accounts!")
@@ -148,8 +150,10 @@ def viewAllAccounts(request):
         accounts = SavedAccount.objects.filter(user=request.user)
         return render(request, 'view-all-accounts.html', {'accounts':accounts})
     
+
+
 # View to view saved account information
-def viewAccount(request, account_id):
+def view_account(request, account_id):
     # Checks if user is authenticated
     if not request.user.is_authenticated:
         messages.error(request, 'Must be logged into to view saved accounts')
@@ -159,8 +163,9 @@ def viewAccount(request, account_id):
         return render(request, 'view-account.html', {'account': account})
 
 
+
 # View for page where users can add new saved account
-def addAccount(request):
+def add_account(request):
     # Checks if user is authenticated
     if not request.user.is_authenticated:
         messages.error(request, "Login to add new saved account!")
@@ -175,8 +180,9 @@ def addAccount(request):
                 user=request.user,
                 account_title = account_title,
                 encrypted_username_or_email = secret_data['enc_username_or_email'],
+                username_or_email_iv = secret_data['username_or_email_iv'],
                 encrypted_password = secret_data['enc_password'],
-                iv = secret_data['validation_iv'],
+                password_iv = secret_data['password_iv'],
             )
             messages.success(request, "New account successfully added!")
             return redirect('view-all-accounts')
@@ -185,8 +191,9 @@ def addAccount(request):
             return render(request, 'add-account.html', {})
     
 
+
 # Confirms that user wants to delete a saved account
-def confirmDelete(request, account_id):
+def confirm_delete(request, account_id):
     # Checks if user is authenticated
     if not request.user.is_authenticated:
         messages.error(request, "Must be logged into the delete accounts!")
@@ -227,6 +234,49 @@ def delete(request, account_id):
             savedAccount.delete()
             messages.success(request, 'Account deleted Successfully!')
         return redirect('view-all-accounts')
+    
+
+
+# View that lets user edit saved accounts
+def edit_saved_account(request, account_id):
+    if not request.user.is_authenticated:
+        messages.error(request, "Must be logged into edit saved accounts!")
+        return redirect('login')
+    else:
+        saved_account = get_object_or_404(SavedAccount, id=account_id)
+
+        # Updates saved account if request method is POST
+        if request.method == 'POST':
+            try:
+                account_title = request.POST.get('account-title')
+                secret_data = json.loads(request.POST.get('secret-data'))
+
+                # Updates saved account with new info
+                saved_account.account_title = account_title
+
+                if secret_data:
+                    if 'enc_username_or_email' in secret_data:
+                        saved_account.encrypted_username_or_email = secret_data['enc_username_or_email']
+                
+                    if 'enc_password' in secret_data:
+                        saved_account.encrypted_password = secret_data['enc_password']
+                
+                    if 'username_or_email_iv' in secret_data:
+                        saved_account.username_or_email_iv = secret_data['username_or_email_iv']
+                    
+                    if 'password_iv' in secret_data:
+                        saved_account.password_iv = secret_data['password_iv']
+                    
+                
+                saved_account.save()
+                messages.success(request, 'Account successfully updated!')
+                return redirect('view-all-accounts')
+
+            except Exception as e:
+                messages.error(request, f'Error while updating account: {str(e)}')
+                return redirect('view-all-accounts')
+
+        return render(request, 'edit-saved-account.html', {'account': saved_account})
 
 
 # Api endpoint for retrieving user profile

@@ -10,7 +10,8 @@
 
 <!-- View saved account page specific content -->
  {% block content %}
-    <p class="fast-hidden" id="iv">{{ account.iv }}</p>
+    <p class="fast-hidden" id="username-or-email-iv">{{ account.username_or_email_iv }}</p>
+    <p class="fast-hidden" id="password-iv">{{ account.password_iv }}</p>
     
     <section id="acc-info-container">
         <h2 id="acc-info-header">{{ account }}</h2>
@@ -22,5 +23,6 @@
     </section>
     
 
-    {% block script %}<script type="module" src="{% static 'js/view-account.js' %}"></script>{% endblock script %}
+    
  {% endblock content %}
+ {% block script %}<script type="module" src="{% static 'js/view-account.js' %}"></script>{% endblock script %}

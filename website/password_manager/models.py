@@ -9,8 +9,9 @@ class SavedAccount(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     account_title = models.CharField(max_length=256)
     encrypted_username_or_email = models.CharField(max_length=255)
+    username_or_email_iv = models.CharField(max_length=256)
     encrypted_password = models.CharField(max_length=256)
-    iv = models.CharField(max_length=256)
+    password_iv = models.CharField(max_length=256)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
