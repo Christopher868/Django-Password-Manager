@@ -6,7 +6,12 @@ const mPassword = document.querySelector('#m-password')
 const usernameOrEmail = document.querySelector('#email-or-username')
 const secretData = document.querySelector('[name="secret-data"]');
 
-
+// Resets form if it is accessed from bfcache
+window.addEventListener('pageshow', (e) => {
+    if(e.persisted){
+        newAccountForm.reset();
+    }
+})
 // Submit event listener for new account form that prevents default
 newAccountForm.addEventListener('submit', async (e) => {
     e.preventDefault();
