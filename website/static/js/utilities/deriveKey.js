@@ -30,20 +30,20 @@ export async function initialKeyDerive(masterPassword){
         ['encrypt', 'decrypt']
     );
 
-    const validationText = 'ZeroKnowledgeCheck';
+    const validationText = window.crypto.getRandomValues(new Uint8Array(32));
     const validationIV = window.crypto.getRandomValues(new Uint8Array(12));
     
 
-    const cipherTextBuffer = await window.crypto.subtle.encrypt(
+    const encryptedValidationText = await window.crypto.subtle.encrypt(
         { name: 'AES-GCM', iv: validationIV },
         derivedKey,
-        enc.encode(validationText)
+        validationText
     );
 
     return {
         salt: arrayBufferToBase64(salt.buffer),
         iterations: iterations,
-        validation_ciphertext: arrayBufferToBase64(cipherTextBuffer),
+        validation_ciphertext: arrayBufferToBase64(encryptedValidationText),
         validation_iv: arrayBufferToBase64(validationIV.buffer)
     }
 
@@ -83,7 +83,6 @@ export async function deriveKeyFromStorage(masterPassword, storedKeyComponents){
 
 // Verifies that the user's master password is correct
 async function verifyMasterPassword(masterPassword){
-    const validationText = 'ZeroKnowledgeCheck';
     const storedKeyComponents = await getStoredProfileData();
     const derivedKey = await deriveKeyFromStorage(masterPassword, storedKeyComponents);
 
@@ -91,21 +90,14 @@ async function verifyMasterPassword(masterPassword){
     const iv = base64ToArrayBuffer(storedKeyComponents.iv);
 
     try{
-        const plaintextBuffer = await window.crypto.subtle.decrypt(
+        const decryptedValidationText = await window.crypto.subtle.decrypt(
         { name: 'AES-GCM', iv:iv },
         derivedKey,
         ciphertext
-    );
-
-        const decryptedText = dec.decode(plaintextBuffer);
-        if(decryptedText === validationText){
-            return derivedKey;
-        } else {
-            return null;
-        }
-
+        );
+        return derivedKey
     } catch (err){
-        console.error(`Master password verification failed: ${err}`);
+        console.error(`Incorrect master password: ${err}`);
         return null;
     }
 }
