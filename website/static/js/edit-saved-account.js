@@ -10,7 +10,6 @@ const encryptedPassword = document.querySelector('[name="enc-password"]').value;
 const passwordIv = document.querySelector('[name="password-iv"]').value;
 const encryptedAdditionalData = document.querySelector('[name="enc-additional-data"]').value;
 const additionalDataIv = document.querySelector('[name="additional-data-iv"]').value;
-
 const secretData = document.querySelector('[name="secret-data"]');
 
 
@@ -47,10 +46,9 @@ editForm.addEventListener('submit', async (e) => {
         secretAdditionalData = {};
     }
 
-    
+    // Checks if nothing has been changed before submitting
     if(!password.value.trim() && !usernameOrEmail.value.trim() && !additionalData.value.trim()) {
-        alert("Can't save changes you didn't change anything!")
-        
+        alert("Can't save changes you didn't change anything!")  
     } else {
         if(secretCredentials === null && secretAdditionalData === null){
             alert('Incorrect master password! Try again.')
@@ -58,14 +56,16 @@ editForm.addEventListener('submit', async (e) => {
             data = {...secretCredentials, ...secretAdditionalData}
             secretData.value = JSON.stringify(data);
 
-            // Clearing out data before submit so it won't reach server
-            data = 'VariableFiller';
-            usernameOrEmail.value = 'FieldFiller';
-            password.value = 'FieldFiller';
-            additionalData.value = 'FieldFiller';
-            masterPassword = 'VariableFiller';
-            secretAdditionalData = 'VariableFiller';
-            secretCredentials = 'VariableFiller';
+            // Wiping data before submitting
+            data = '';
+            usernameOrEmail.value = '';
+            password.value = '';
+            additionalData.value = '';
+            masterPassword = '';
+            secretAdditionalData = '';
+            secretCredentials = '';
+
+            // Submitting form
             editForm.submit();
         }
     }

@@ -29,8 +29,11 @@ newAccountForm.addEventListener('submit', async (e) => {
         } else if (!additionalData.value){
             additionalData.value = 'Blank';
         }
+
+        // Encrypting credentials
         var secretCredentials = await encryptSecretCredentials(mPassword.value.trim(), password.value.trim(), usernameOrEmail.value.trim());
         var secretAdditionalData = await encryptAdditionalData(mPassword.value.trim(), additionalData.value);
+
         if(secretCredentials === null || secretAdditionalData === null){
             alert('Master key was incorrect encryption failed! Try again');
         } else {
@@ -38,13 +41,15 @@ newAccountForm.addEventListener('submit', async (e) => {
             secretData.value = JSON.stringify(data);
 
             // Wiping data variables before sumbitting
-            usernameOrEmail.value = 'FieldFiller';
-            mPassword.value = 'FieldFiller';
-            password.value = 'FieldFiller';
-            additionalData.value = 'FieldFiller'
-            data = 'VariableFiller';
-            secretCredentials = 'VariableFiller'
-            secretAdditionalData = 'VariableFiller'
+            usernameOrEmail.value = '';
+            mPassword.value = '';
+            password.value = '';
+            additionalData.value = ''
+            data = '';
+            secretCredentials = ''
+            secretAdditionalData = ''
+
+            // Submitting form
             newAccountForm.submit();
         }
     }

@@ -7,11 +7,12 @@ const additionalData = document.querySelector('#additional-data');
 const additionalDataIv = document.querySelector('#additional-data-iv').textContent;
 const header = document.querySelector('#acc-info-header');
 
+// Clears fields if user accesses page from bfcache
 window.addEventListener('pageshow', (e)=> {
     if(e.persisted){
         header.innerHTML = "Refresh page"+ "<br>" +"to view info";
-        usernameOrEmail.textContent = "null";
-        password.textContent = "null"
+        usernameOrEmail.textContent = '';
+        password.textContent = '';
     } else {
         decryptPassword() 
     }
@@ -25,6 +26,8 @@ async function decryptPassword(){
     if(masterPassword === null){
         alert('No password entered please refesh webpage and try again!')
     } else {
+
+        // Decrypting info for viewing
         var decryptedUsernameOrEmail = await decryptSecret(masterPassword.trim(), usernameOrEmail.textContent, usernameOrEmailIv)
         var decryptedPassword = await decryptSecret(masterPassword.trim(), password.textContent, passwordIv)
         var decryptedAdditionalData = await decryptSecret(masterPassword.trim(), additionalData.textContent, additionalDataIv)
@@ -36,10 +39,10 @@ async function decryptPassword(){
             additionalData.textContent = decryptedAdditionalData
 
             // Clearing fields for data security
-            decryptedUsernameOrEmail = null;
-            decryptedPassword = null;
-            decryptedAdditionalData = null;
-            masterPassword = null;
+            decryptedUsernameOrEmail = '';
+            decryptedPassword = '';
+            decryptedAdditionalData = '';
+            masterPassword = '';
         }
     }
     
