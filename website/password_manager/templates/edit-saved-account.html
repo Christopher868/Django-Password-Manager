@@ -20,8 +20,6 @@
         <input type="hidden" name="username-or-email-iv" value="{{ account.username_or_email_iv }}">
         <input type="hidden" name="enc-password" value="{{ account.encrypted_password }}">
         <input type="hidden" name="password-iv" value="{{ account.password_iv }}">
-        <input type="hidden" name="enc-additional-data" value="{{ account.encrypted_additional_data }}">
-        <input type="hidden" name="additional-data-iv" value="{{ account.additional_data_iv}}">
 
         <label for="account-title">Account Title</label>
         <input type="text" name="account-title" id="account-title" value="{{ account.account_title }}" required>

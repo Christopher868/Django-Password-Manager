@@ -8,8 +8,6 @@ const encryptedUsernameOrEmail = document.querySelector('[name="enc-username-or-
 const usernameOrEmailIv = document.querySelector('[name="username-or-email-iv"]').value;
 const encryptedPassword = document.querySelector('[name="enc-password"]').value;
 const passwordIv = document.querySelector('[name="password-iv"]').value;
-const encryptedAdditionalData = document.querySelector('[name="enc-additional-data"]').value;
-const additionalDataIv = document.querySelector('[name="additional-data-iv"]').value;
 const secretData = document.querySelector('[name="secret-data"]');
 
 
