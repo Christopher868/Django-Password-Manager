@@ -28,7 +28,7 @@
     }
 }
 
-#edit-account-form input {
+#edit-account-form input, #edit-account-form textarea {
     padding: .4rem 1rem;
     width: 90%;
     min-width: 200xp;

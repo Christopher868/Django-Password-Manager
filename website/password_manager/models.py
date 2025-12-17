@@ -12,6 +12,8 @@ class SavedAccount(models.Model):
     username_or_email_iv = models.CharField(max_length=256)
     encrypted_password = models.CharField(max_length=256)
     password_iv = models.CharField(max_length=256)
+    encrypted_additional_data = models.CharField(max_length=2000)
+    additional_data_iv = models.CharField(max_length=256)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

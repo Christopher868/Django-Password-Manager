@@ -12,12 +12,16 @@
  {% block content %}
     <p class="fast-hidden" id="username-or-email-iv">{{ account.username_or_email_iv }}</p>
     <p class="fast-hidden" id="password-iv">{{ account.password_iv }}</p>
+    <p class="fast-hidden" id="additional-data-iv">{{ account.additional_data_iv }}</p>
+    
     
     <section id="acc-info-container">
         <h2 id="acc-info-header">{{ account }}</h2>
         <div id="acc-info">
             <p><span class="info-header">Account Username or Email</span><span class="info" id="username-or-email">{{ account.encrypted_username_or_email }}<span></p>
             <p><span class="info-header">Account Password</span><span class="info" id="password">{{ account.encrypted_password }}</span></p>
+            <p><span class="info-header">Additional Information</span><span class="info" id="additional-data">{{ account.encrypted_additional_data }}</span></p>
+
         </div>
         <button><a href="{% url 'view-all-accounts' %}">Back</a></button>
     </section>

@@ -20,17 +20,24 @@
         <input type="hidden" name="username-or-email-iv" value="{{ account.username_or_email_iv }}">
         <input type="hidden" name="enc-password" value="{{ account.encrypted_password }}">
         <input type="hidden" name="password-iv" value="{{ account.password_iv }}">
+        <input type="hidden" name="enc-additional-data" value="{{ account.encrypted_additional_data }}">
+        <input type="hidden" name="additional-data-iv" value="{{ account.additional_data_iv}}">
 
         <label for="account-title">Account Title</label>
         <input type="text" name="account-title" id="account-title" value="{{ account.account_title }}" required>
 
         <label for="username-or-email">New Username or Email</label>
-        <input type="text" name="username-or-email" id="username-or-email">
+        <input type="text" name="username-or-email" id="username-or-email" placeholder="Enter new username or email">
         <small>You cannot edit existing username or email only replace the original.<br>If you do not want to change this field leave it blank.<br>Spaces not allowed</small>
 
         <label for="password">New Password</label>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" placeholder="Enter new password">
         <small>You cannot edit existing password only replace the original.<br>If you do not want to change this field leave it blank.<br>Spaces not allowed</small>
+
+        <label for="additional-data">Additional Information</label>
+        <textarea rows="6" maxlength="1500" name="additional-data" id="additional-data" placeholder="Enter new additional account Information"></textarea>
+        <small>You cannot edit existing additional account information only replace the original.<br>If you do not want to change this field leave it blank.</small>
+
 
         <div id="form-btn-container">
             <button type="button"><a class="button-size" href="{% url 'view-all-accounts' %}">Discard Changes</a></button>

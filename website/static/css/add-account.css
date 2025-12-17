@@ -29,7 +29,7 @@
     }
 }
 
-#new-account-form input {
+#new-account-form input, #new-account-form textarea {
     padding: .4rem 1rem;
     width: 90%;
     min-width: 200xp;

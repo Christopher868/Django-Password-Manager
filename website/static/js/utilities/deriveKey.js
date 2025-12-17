@@ -103,8 +103,8 @@ async function verifyMasterPassword(masterPassword){
 }
 
 
-// Encrypts data before being sent to database
-export async function encryptSecret(masterPassword, secretPassword, secretUsernameOrEmail){
+// Encrypts credentials before being sent to database
+export async function encryptSecretCredentials(masterPassword, secretPassword, secretUsernameOrEmail){
     const derivedMasterKey = await verifyMasterPassword(masterPassword)
     if(derivedMasterKey === null){
         return null;
@@ -129,6 +129,27 @@ export async function encryptSecret(masterPassword, secretPassword, secretUserna
             password_iv: arrayBufferToBase64(passwordIv.buffer),
             enc_username_or_email: arrayBufferToBase64(encryptedUsernameOrEmail),
             username_or_email_iv: arrayBufferToBase64(usernameOrEmailIv.buffer)
+        }
+    }
+}
+
+// Encrypts additional data for account
+export async function encryptAdditionalData(masterPassword, secretAdditionalData){
+    const derivedMasterKey = await verifyMasterPassword(masterPassword)
+    if(derivedMasterKey === null){
+        return null;
+    } else {
+        const additionalDataIv = window.crypto.getRandomValues(new Uint8Array(12));
+        
+        const encryptedAdditionalData = await window.crypto.subtle.encrypt(
+            { name: 'AES-GCM', iv: additionalDataIv },
+            derivedMasterKey,
+            enc.encode(secretAdditionalData)
+        );
+
+        return {
+            enc_additional_data: arrayBufferToBase64(encryptedAdditionalData),
+            additional_data_iv: arrayBufferToBase64(additionalDataIv.buffer),
         }
     }
 }

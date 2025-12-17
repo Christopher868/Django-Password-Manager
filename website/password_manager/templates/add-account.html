@@ -15,10 +15,11 @@
     <h2>Add<br>New Account</h2>
     {% csrf_token %}
     <input type="hidden" name="secret-data" value="">
-    <input type="text" name="account-title" id="account-title" placeholder="Enter name for account" required>
-    <input type="text" name="email-or-username" id="email-or-username" placeholder="Enter username or email" required>
-    <input type="password" name="password" id="password" placeholder="Enter password for account" required>
-    <input type="password" name="m-password" id="m-password" placeholder="Enter master password" required>
+    <input type="text" name="account-title" id="account-title" placeholder="Enter name for account" require>
+    <input type="text" name="email-or-username" id="email-or-username" placeholder="Enter username or email">
+    <input type="password" name="password" id="password" placeholder="Enter password for account">
+    <input type="password" name="m-password" id="m-password" placeholder="Enter master password">
+    <textarea rows="6" maxlength="1500" name="additional-data" id="additional-data" placeholder="Enter any additional account information."></textarea>
 
     <div id="form-btn-container">
         <button type="button"><a class="button-size" href="{% url 'view-all-accounts' %}">Cancel</a></button>

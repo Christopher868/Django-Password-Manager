@@ -183,6 +183,8 @@ def add_account(request):
                 username_or_email_iv = secret_data['username_or_email_iv'],
                 encrypted_password = secret_data['enc_password'],
                 password_iv = secret_data['password_iv'],
+                encrypted_additional_data = secret_data['enc_additional_data'],
+                additional_data_iv = secret_data['additional_data_iv'],
             )
             messages.success(request, "New account successfully added!")
             return redirect('view-all-accounts')
@@ -266,6 +268,12 @@ def edit_saved_account(request, account_id):
                     
                     if 'password_iv' in secret_data:
                         saved_account.password_iv = secret_data['password_iv']
+
+                    if 'enc_additional_data' in secret_data:
+                        saved_account.encrypted_additional_data = secret_data['enc_additional_data']
+                    
+                    if 'additional_data_iv' in secret_data:
+                        saved_account.additional_data_iv = secret_data['additional_data_iv']
                     
                 
                 saved_account.save()
