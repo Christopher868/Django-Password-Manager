@@ -100,17 +100,21 @@ small {
     font-size: .65rem;
     align-self:end;
     text-align: right;
-    width: 90%;
-    padding: 0 2rem;
+    width: 100%;
+    padding: .1rem 1.75rem;
 }
 
 /* field status stylings */
 
 #password1-status-msg, #password2-status-msg {
     align-self: end;
-    padding: 0 2rem;
+    padding: 0 1.75rem;
 }
 
 .status-symbol {
     width: 10px;
+}
+
+.warning{
+    color:red !important;
 }

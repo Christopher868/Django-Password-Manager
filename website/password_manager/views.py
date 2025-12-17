@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
 from .forms import CustomUserCreationForm, UpdateUserForm
 from django.contrib import messages
@@ -62,24 +63,30 @@ def user_registration(request):
         if request.method == "POST":
             form = CustomUserCreationForm(request.POST)
             if form.is_valid():
-                # Saves user in database and logs them in
-                user = form.save()
-                login(request, user)
 
+                # Checks to make sure email is not already in use before continuing 
+                user_email = request.POST.get('email')
+                if User.objects.filter(email=user_email).exists():
+                    messages.error(request, 'Account already associated with that email. Please try again.')
+                    return redirect('register')
+                else:
+                    # Saves user in database and logs them in
+                    user = form.save()
+                    login(request, user)
 
-                # Creates profile for user for encryption and decryption
-                profileData = json.loads(request.POST.get('profile-data'))
-                UserProfile.objects.create(
-                    user=user,
-                    salt = profileData['salt'],
-                    iterations = profileData['iterations'],
-                    iv = profileData['validation_iv'],
-                    cipher_text = profileData['validation_ciphertext']
-                )
-                
+                    # Creates profile for user for encryption and decryption
+                    profileData = json.loads(request.POST.get('profile-data'))
+                    UserProfile.objects.create(
+                        user=user,
+                        salt = profileData['salt'],
+                        iterations = profileData['iterations'],
+                        iv = profileData['validation_iv'],
+                        cipher_text = profileData['validation_ciphertext']
+                    )
+                    
 
-                messages.success(request, f"Account successfully created. Welcome {user.username}!")
-                return redirect('index')
+                    messages.success(request, f"Account successfully created. Welcome {user.username}!")
+                    return redirect('index')
             else:
                 # Displays form errors to users
                 for field, errors in form.errors.items():
