@@ -20,6 +20,7 @@ urlpatterns = [
     path('confirm-delete/<int:account_id>/', views.confirm_delete, name="delete-confirm"),
     path('delete/<int:account_id>/', views.delete, name="delete"),
     path('edit-saved-account/<int:account_id>/', views.edit_saved_account, name="edit-saved-account"),
+    path('locked-out/', views.lockout, name='lockout'),
     path('api/retrieve-profile/', views.retrieve_user_profile, name="retrieve-profile"),
     
     

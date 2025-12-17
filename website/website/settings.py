@@ -1,6 +1,8 @@
 from pathlib import Path
 import environ
 import os
+from datetime import timedelta
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,6 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'password_manager',
+    'axes',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 MIDDLEWARE = [
@@ -45,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'website.urls'
@@ -137,3 +146,13 @@ DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
 
 # Reset password email link timeout
 PASSWORD_RESET_TIMEOUT = 600
+
+
+# Axes Config
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = timedelta(minutes=15)
+AXES_LOCKOUT_URL = '/locked-out/'
+AXES_RESET_ON_SUCCESS = True
+AXES_LOCKOUT_BY_USER_OR_IP = False
+AXES_LOCKOUT_BY_USER_AND_IP = False
+AXES_IP_WHITESOURCE = 1

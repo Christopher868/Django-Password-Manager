@@ -9,7 +9,12 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import UserProfile, SavedAccount
 from django.http import JsonResponse
+from datetime import timedelta
+from axes.models import AccessAttempt
+from django.utils import timezone
 import json
+from axes.handlers.proxy import AxesProxyHandler
+
 
 
 # View for index home page
@@ -25,6 +30,7 @@ def user_login(request):
         messages.info(request, "You are already logged in!")
         return redirect('index')
     else:
+        attempts_left = getattr(settings, 'AXES_FAILURE_LIMIT', 3)
         if request.method == "POST":
             form = AuthenticationForm(request, data=request.POST)
             if form.is_valid():
@@ -34,8 +40,30 @@ def user_login(request):
                 return redirect('index')
             else:
                 messages.error(request, "Incorrect username or password!")
+                # Sends remaining attempts as context to display to user
+                failures = AxesProxyHandler.get_failures(request)
+                attempts_left = max(0, attempts_left - failures) 
         
-        return render(request, 'accounts/login.html', {}) 
+        return render(request, 'accounts/login.html', {'attempts_left':attempts_left}) 
+    
+
+# View for lockout page if failed login too many times
+def lockout(request):  
+    attempt = AccessAttempt.objects.filter(ip_address=request.META.get('REMOTE_ADDR')).latest('attempt_time')
+        
+    #calculating remaining time before user can login again
+    unlocked_at = attempt.attempt_time + settings.AXES_COOLOFF_TIME
+    now = timezone.now()
+    
+    seconds_remaining = int((unlocked_at - now).total_seconds())
+    minutes, seconds = divmod(seconds_remaining, 60)
+    time = f'{minutes}:{seconds:02d}'
+
+    # If time is zero or below redirecting back to login
+    if seconds_remaining <= 0:
+        return redirect('login')
+    
+    return render(request, 'lockout-page.html', {'time': time})  
 
 
 

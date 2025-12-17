@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- Page specific head elements -->
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/lockout-page.css' %}">
+    <title>Email Sent</title>
+{% endblock head %}
+{% block header %}{% endblock header %}
+
+<!-- Locked out page content -->
+{% block content %}
+<section id="msg-container">
+    <h2>You have been temporarily locked out!</h2>
+    <p>Because of too many failed attempts at logging in you have been locked out from trying again for a small duration.</p>
+    <p>You can try again after 15 minutes. Time remaining: {{ time }}<br>Note: Trying again before timer has finished will reset it!</p>
+    <button><a class="button-size" href="{% url 'index' %}">Go To Homepage</a></button>
+</section>
+{% endblock content %}

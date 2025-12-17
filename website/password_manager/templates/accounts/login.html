@@ -17,6 +17,7 @@
         
         <input type="text" name="username" id="username" placeholder="Enter username" required>
         <input type="password" name="password" id="password" placeholder="Enter password" required>
+        <small>{% if attempts_left != 5 %}Remaining attempts before temporary lockout: {{ attempts_left }}{% endif %}</small>
         
         <div id="login-btn-container">
             <button type="button"><a class="button-size" href="{% url 'index' %}">Cancel</a></button>

@@ -89,3 +89,9 @@
 .button-size {
     padding: .5rem 0;
 }
+
+small {
+    text-align: right;
+    padding: 0 1rem;
+    width: 90%;
+}
