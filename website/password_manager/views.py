@@ -54,7 +54,6 @@ def lockout(request):
     #calculating remaining time before user can login again
     unlocked_at = attempt.attempt_time + settings.AXES_COOLOFF_TIME
     now = timezone.now()
-    
     seconds_remaining = int((unlocked_at - now).total_seconds())
     minutes, seconds = divmod(seconds_remaining, 60)
     time = f'{minutes}:{seconds:02d}'
