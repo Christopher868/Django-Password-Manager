@@ -35,7 +35,7 @@ def user_login(request):
             form = AuthenticationForm(request, data=request.POST)
             if form.is_valid():
                 user = form.get_user()
-                login(request, user)
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
                 messages.success(request, f"Login Successful. Welcome back {user.username}!")
                 return redirect('index')
             else:
@@ -99,7 +99,7 @@ def user_registration(request):
                 else:
                     # Saves user in database and logs them in
                     user = form.save()
-                    login(request, user)
+                    login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 
                     # Creates profile for user for encryption and decryption
                     profileData = json.loads(request.POST.get('profile-data'))
