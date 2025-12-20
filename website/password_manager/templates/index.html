@@ -11,17 +11,19 @@
 {% block content %}
     <!-- Homepage Img container -->
     <section id="home-img-container">
-        <img src="{% static 'images/pm-website-bg.jpg' %}" alt="Index page header img displaying person on a password manager website">
+        <img src="{% static 'images/pm-website-bg.jpg' %}" alt="Person using a password manager website">
     </section>
 
     <!-- Website intro container -->
     <section id="pwd-manager-intro">
         <div id="intro-text-container">
-           <p>With our Password Manager, your login credentials aren't just saved; they are securely encrypted so that only you can access them not us.
-             This gives you the freedom to log in and access your passwords from anywhere.
-              Say goodbye to the frustration of the 'Forgot Password' loop every time you try to access an old account.
-               Furthermore, you can finally break the dangerous habit of reusing the same password across multiple websites.
-                Now, you can easily use unique, complex passwords for every single site without the burden of having to memorize them all.</p>
+           <p>
+                With our Password Manager, your login credentials aren't just saved; they are securely encrypted so that only you can access them, not us.
+                This gives you the freedom to log in and access your passwords from anywhere.
+                Say goodbye to the frustration of the 'Forgot Password' loop every time you try to access an old account.
+                Furthermore, you can finally break the dangerous habit of reusing the same password across multiple websites.
+                    Now, you can easily use unique, complex passwords for every single site without the burden of having to memorize them all.
+            </p>
         </div>
     </section>
 
@@ -37,16 +39,14 @@
         <div id="about-text-container">
             <p>
                 I built this website as a personal project to create a safer and more reliable way to store passwords, instead of keeping sensitive information in plain text notes or other insecure places.
-                 Any account information saved in the password manager is protected using a zero-knowledge encryption model, meaning the data is encrypted on the client side before it’s ever stored.
-                  This ensures that only the user can access their information.
-                    <br><br>
-                    Because of how the system is designed, not even I, as the developer, can view or recover stored passwords.
-                    The focus of this project was to prioritize user privacy while still keeping the application easy to use.
-                     It also gave me hands-on experience working with encryption, secure data handling, and building privacy-focused features in a real-world application.
+                Any account information saved in the password manager is protected using a zero-knowledge encryption model, meaning the data is encrypted on the client side before it’s ever stored.
+                This ensures that only the user can access their information.
+                <br><br>
+                Because of how the system is designed, not even I, as the developer, can view or recover stored passwords.
+                The focus of this project was to prioritize user privacy while still keeping the application easy to use.
+                It also gave me hands-on experience working with encryption, secure data handling, and building privacy-focused features in a real-world application.
             </p>
         </div>
     </section>
 
 {% endblock content %}
-    
-

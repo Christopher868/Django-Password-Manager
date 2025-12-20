@@ -117,9 +117,21 @@
         box-shadow: 2px 2px 4px black;
     }
 }
-.pwd h4:hover {
-    text-shadow: 0px 0px 1px black;
+
+.pwd h4 {
+    max-width: 500px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media (max-width:600px) {
+        max-width: 150px;
+        font-size: 1.2rem;
+    }
+    &:hover {
+        text-shadow: 0px 0px 1px black;
+    }
 }
+
 
 .pwd-symbols-container {
     display: flex;

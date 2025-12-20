@@ -18,10 +18,12 @@
 #acc-info-header {
     text-align: center;
     font-weight: bolder;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #294659;
     text-shadow: 0px 0px 1px black;
     margin-bottom: 30px;
+    width: 90%;
+    overflow-wrap: break-word;
     &:hover {
         cursor:default;
     }

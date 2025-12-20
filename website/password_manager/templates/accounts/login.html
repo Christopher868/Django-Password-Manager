@@ -10,7 +10,7 @@
 <!-- Login page content -->
 {% block content %}
 
-    <!-- Form that allows users to login -->
+    <!-- Form that allows users to log in -->
     <form id="login-form" action="{% url 'login' %}" method="POST">
         <h1 id="login-header">Login</h1>
         {% csrf_token %}
@@ -21,7 +21,7 @@
         
         <div id="login-btn-container">
             <button type="button"><a class="button-size" href="{% url 'index' %}">Cancel</a></button>
-            <button class="button-size" type="submit">Login</button>
+            <button class="button-size" type="submit">Log In</button>
         </div>
 
         <!-- Register and reset password links -->

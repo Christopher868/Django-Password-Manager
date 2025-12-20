@@ -25,8 +25,8 @@
 
         <div class="input-container">
             <input type="password" name="password1" id="password1" placeholder="Enter password" required>
-            <small id="password1-status-msg">Password must be atleast 8 characters. <img id="password1-status-symbol" class="status-symbol" src="{% static 'images/Red-X.svg' %}" alt="Field status symbol"></small>
-            <small>This password will be used to login your account.</small>
+            <small id="password1-status-msg">Password must be at least 8 characters. <img id="password1-status-symbol" class="status-symbol" src="{% static 'images/Red-X.svg' %}" alt="Field status symbol"></small>
+            <small>This password will be used to log in to your account.</small>
         </div>    
 
         <div class="input-container">
@@ -35,8 +35,8 @@
         </div>  
          <div class="input-container">
             <input type="password" name="m-password" id="m-password" placeholder="Enter master password" required>
-            <small id="m-status-msg" class="">Master password must be atleast 12 characters long and cannot match your user password. <img id="m-status-symbol" class="status-symbol" src="{% static 'images/Red-X.svg' %}" alt="Field status symbol"></small>
-            <small>You will be required to enter this password everytime you access stored accounts.<br><span class="warning">It is not able to be reset or retrievable so make make sure it something you will remember.</span></small>
+            <small id="m-status-msg" class="">Master password must be at least 12 characters long and cannot match your user password. <img id="m-status-symbol" class="status-symbol" src="{% static 'images/Red-X.svg' %}" alt="Field status symbol"></small>
+            <small>You will be required to enter this password every time you access stored accounts.<br><span class="warning">It cannot be retrieved and is not resettable, so make sure it is something you will remember.</span></small>
         </div> 
          <div class="input-container">
             <input type="password" name="m-password2" id="m-password2" placeholder="Confirm master password" required>
