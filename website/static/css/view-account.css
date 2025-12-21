@@ -45,7 +45,7 @@
     flex-direction: column;
     align-items: center;
     gap: .25rem;
-    max-width: 100%;
+    width: 90%;
     height: fit-content;
 
 }
@@ -91,4 +91,8 @@
     text-decoration: none;
     display: block;
     padding: .5rem 0;
+}
+
+#additional-data {
+    white-space: pre-wrap;
 }
