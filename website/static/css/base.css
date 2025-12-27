@@ -221,7 +221,7 @@ footer {
 #sidebar-login-link {
     display: none;
     @media (max-width:600px) {
-        display: block;
+        display: flex;
     }
 }
 
